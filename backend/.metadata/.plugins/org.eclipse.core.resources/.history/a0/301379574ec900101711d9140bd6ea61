@@ -1,0 +1,33 @@
+package com.eventgo.UserService;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.eventgo.dto.SignUp_Request;
+import com.eventgo.repository.UserRepository;
+import com.eventgo.user.Entity.User;
+
+@Service
+public class UserService {
+
+	private final UserRepository userRepo;
+	private final BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+	
+	public UserService(UserRepository userRepo) {
+		this.userRepo=userRepo;
+	}
+	
+	//SignUp
+	public String signUp(SignUp_Request request) {
+		if(userRepo.findByEmail(request.getEmail())!=null) {
+			return "Email already Exists";
+		}
+		User user =new User();
+		user.setName(request.getName());
+		user.setEmail(request.getEmail());
+		user.setPassword(encoder.encode(request.getPassword()));//Hashing
+		
+		userRepo.save(user);
+		return "User registered seccessfully";
+	}
+}

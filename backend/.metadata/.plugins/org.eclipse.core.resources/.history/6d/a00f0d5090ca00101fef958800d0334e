@@ -1,0 +1,38 @@
+package com.eventgo.user.service.imple;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.eventgo.utility.JwtUtil;
+
+import io.jsonwebtoken.io.IOException;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
+
+	@Autowired 
+	private JwtUtil jwtUtil;
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
+
+
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, java.io.IOException {
+		// TODO Auto-generated method stub
+		 final String header = request.getHeader("Authorization");
+	        String username = null;
+	        String token = null;
+	        if (header != null && header.startsWith("Bearer ")) {
+	            token = header.substring(7);
+	            try {
+	                username = jwtUtil.getUsernameFromToken(token);
+	            } catch (Exception e) {
+	                // invalid token
+	            }
+	}
+	
+}

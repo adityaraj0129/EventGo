@@ -1,0 +1,32 @@
+package com.eventgo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.eventgo.UserService.UserService;
+import com.eventgo.dto.Login_Request;
+import com.eventgo.dto.SignUp_Request;
+
+@RestController
+@RequestMapping("/api/auth")
+@CrossOrigin("*")
+public class AuthController {
+
+	
+	@Autowired
+	private UserService userservice;
+	
+	@PostMapping("/signup")
+	public String signup(@RequestBody SignUp_Request request) {
+		return userservice.signUp(request);
+	}
+	
+	@PostMapping("login")
+	public String login(@RequestBody Login_Request request) {
+		return userservice.login(request);
+	}
+}

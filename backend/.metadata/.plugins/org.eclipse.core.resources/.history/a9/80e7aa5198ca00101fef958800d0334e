@@ -1,0 +1,38 @@
+package com.eventgo.user.service.imple;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.eventgo.dto.EventDTO;
+import com.eventgo.user.Entity.Event;
+
+@Service
+public class EventService {
+	@Autowired
+	private EventRepository repo;
+
+    public List<Event> findAll() { return repo.findAll(); }
+    
+    public Optional<Event> findById(Long id) { return repo.findById(id); }
+    public Event createFromDto(EventDTO d) {
+        Event e = new Event();
+        e.setTitle(d.title); e.setDescription(d.description);
+        e.setOrganizerName(d.organizerName); e.setPrice(d.price);
+        e.setStartDate(LocalDateTime.parse(d.startDate));
+        e.setEndDate(LocalDateTime.parse(d.endDate));
+        e.setImageUrl(d.imageUrl);
+        // capacity, city, etc
+        return repo.save(e);
+    }
+    public Optional<Event> update(Long id, EventDTO d) {
+        return repo.findById(id).map(e -> {
+            e.setTitle(d.title); /* set others */ 
+            return repo.save(e);
+        });
+    }
+    public void delete(Long id) { repo.deleteById(id); }
+}

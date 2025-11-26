@@ -1,0 +1,5 @@
+package com.eventgo.service.imple;
+
+public class UserService {
+
+}

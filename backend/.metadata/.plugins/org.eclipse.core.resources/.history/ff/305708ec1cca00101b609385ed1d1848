@@ -1,0 +1,14 @@
+spring.application.name=EventGo
+
+spring.datasource.url=jdbc:mysql://localhost:3306/event_go
+spring.datasource.username=root
+spring.datasource.password=aditya292003@
+
+spring.datasource.driverClassName=org.h2.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.data.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+#JWT secret and expiry (1 day)
+jwt.secret=VerifySecretKeyChangeThisForProd_ReplaceIt
+jwt.expiration=86400000

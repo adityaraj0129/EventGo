@@ -1,0 +1,15 @@
+package com.eventgo.dto;
+
+public class EventDTO {
+
+	public String title;
+	public String description;
+	public String organizerName;
+	public String country;
+	public String city;
+	public Double price;
+	public String startDate;
+	public String endDate;
+	public Integer capacity;
+	public String iamgeUrl;
+}

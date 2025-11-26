@@ -1,0 +1,5 @@
+package com.eventgo.utility;
+
+public class JwtUtil {
+
+}

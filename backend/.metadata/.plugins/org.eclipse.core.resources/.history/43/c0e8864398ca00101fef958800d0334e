@@ -1,0 +1,22 @@
+package com.eventgo.repository;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.eventgo.user.Entity.Event;
+import com.eventgo.user.Entity.User;
+
+public interface UserRepository extends JpaRepository<User, Long>{
+    Optional<User> findByUsername(String email);
+    boolean existByUsername(String username);
+    boolean existsByEmail(String email);
+}
+
+ interface EventRepository extends JpaRepository<Event,Long>{
+	// custom quaries like find upcoming/past by date
+	List<Event> findByStartDateAfter(LocalDateTime now);
+	List<Event> findByEndDateBefore(LocalDateTime now);
+}

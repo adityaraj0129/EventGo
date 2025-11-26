@@ -1,0 +1,42 @@
+package com.eventgo;
+
+public class AuthController {
+	  private final UserService userService;
+
+	    @PostMapping("/signup")
+	    public ResponseEntity<ApiResponse> signup(@RequestBody SignupRequest request) {
+	        userService.registerUser(request);
+	        return ResponseEntity.ok(new ApiResponse("User registered successfully"));
+	    }
+
+	    @PostMapping("/login")
+	    public ResponseEntity<ApiResponse> login(@RequestBody LoginRequest request,
+	                                             HttpSession session) {
+
+	        User user = userService.validateUser(request.getEmail(), request.getPassword());
+
+	        // store in session
+	        session.setAttribute("USER_ID", user.getId());
+	        session.setAttribute("ROLE", user.getRole().name());
+
+	        return ResponseEntity.ok(new ApiResponse("Login successful"));
+	    }
+
+	    @PostMapping("/logout")
+	    public ResponseEntity<ApiResponse> logout(HttpSession session) {
+	        session.invalidate();
+	        return ResponseEntity.ok(new ApiResponse("Logged out"));
+	    }
+
+	    @GetMapping("/me")
+	    public ResponseEntity<?> me(HttpSession session) {
+	        Object userId = session.getAttribute("USER_ID");
+	        Object role = session.getAttribute("ROLE");
+	        if (userId == null) {
+	            return ResponseEntity.status(401).body(new ApiResponse("Not logged in"));
+	        }
+	        return ResponseEntity.ok(
+	                "UserId=" + userId + ", role=" + role
+	        );
+	    }
+}

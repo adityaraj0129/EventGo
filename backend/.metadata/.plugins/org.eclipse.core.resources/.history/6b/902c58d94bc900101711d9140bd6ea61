@@ -1,0 +1,5 @@
+package com.eventgo.dto;
+
+public class Login_Request {
+
+}

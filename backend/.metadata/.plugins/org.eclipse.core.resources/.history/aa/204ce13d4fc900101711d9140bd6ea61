@@ -1,0 +1,5 @@
+package com.eventgo.controller;
+
+public class AuthController {
+
+}

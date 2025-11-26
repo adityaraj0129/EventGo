@@ -1,0 +1,5 @@
+package com.eventgo.user.service.imple;
+
+public class JwtAuthenticationFilter {
+
+}

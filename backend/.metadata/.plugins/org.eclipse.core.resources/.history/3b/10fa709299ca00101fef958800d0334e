@@ -1,0 +1,5 @@
+package com.eventgo.entity;
+
+public class Event {
+
+}

@@ -1,0 +1,48 @@
+package com.eventgo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.eventgo.UserService.UserService;
+import com.eventgo.dto.Login_Request;
+import com.eventgo.dto.SignUp_Request;
+import com.eventgo.repository.UserRepository;
+import com.eventgo.user.Entity.Role;
+import com.eventgo.user.Entity.User;
+
+@RestController
+@RequestMapping("/api/auth")
+@CrossOrigin(origins ="http://localhost:5173")
+public class AuthController {
+
+	
+	@Autowired
+	private UserService userservice;
+	
+	@PostMapping("/signup")
+	public ResponseEntity<?>registry(@RequestBody SignUp_Request request){
+		
+		if(UserRepository.existsByUsername(request.getUsername())) {
+		return ResponseEntity.badRequest()
+.body("Username already exists");	
+		}
+		
+	User user =new User();
+	user.setUsername(request.getUsername());
+	user.setPassword(PasswordEncoder.encode(request.getPassword()));
+	}
+	Role defaultRole =roleRepository.findByName("Role_User");
+	user.getRoles().add(defaultRole);
+	
+	userRepository.save(user);
+	
+	return ResponseEntity.ok("User registered successfully");
+}
+	
+}
