@@ -1,7 +1,20 @@
 package com.eventgo.controller;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.eventgo.dto.ApiResponse;
+import com.eventgo.dto.LoginRequest;
+import com.eventgo.dto.SignupRequest;
+import com.eventgo.entity.User;
+import com.eventgo.service.imple.UserService;
+
+import jakarta.servlet.http.HttpSession;
+
 public class AuthController {
-	  private final UserService userService;
+	  private final UserService userService = null;
 
 	    @PostMapping("/signup")
 	    public ResponseEntity<ApiResponse> signup(@RequestBody SignupRequest request) {
