@@ -1,5 +1,0 @@
-package com.eventgo.dto;
-
-public class ApiResponse {
-
-}

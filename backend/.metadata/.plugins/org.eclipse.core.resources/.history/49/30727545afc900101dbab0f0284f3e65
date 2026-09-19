@@ -1,5 +1,0 @@
-package com.eventgo.config;
-
-public class CorsConfig {
-
-}

@@ -1,5 +1,0 @@
-package com.eventgo.user.Entity;
-
-public enum Role {
-
-}

@@ -1,5 +1,0 @@
-package com.eventgo.security;
-
-public class AuthFilter {
-
-}
